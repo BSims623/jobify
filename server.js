@@ -7,6 +7,8 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cloudinary from 'cloudinary'
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
 
 
 // routers
@@ -37,16 +39,10 @@ if (process.env.NODE_ENV === 'development') {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.resolve(__dirname, './client/dist')))
 
-app.use(cookieParser())
-app.use(express.json())
-
-app.get('/', (req, res) => {
-    res.send('Hello World')
-});
-
-app.get('/api/v1/test', (req, res) => {
-    res.json({ msg: 'test route' });
-});
+app.use(cookieParser());
+app.use(express.json());
+app.use(helmet());
+app.use(mongoSanitize());
 
 
 
