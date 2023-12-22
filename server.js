@@ -43,6 +43,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(helmet());
 app.use(mongoSanitize());
+app.set('trust proxy', 'loopback')
 
 
 
